@@ -3259,6 +3259,10 @@ body {
         transition: var(--transition) !important;
     }
 
+    .social-icons a {
+        color: var(--secondary-color) !important;
+    }
+
     .social-icons a:hover {
         color: var(--primary-color) !important;
     }
