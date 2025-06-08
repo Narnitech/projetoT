@@ -3211,15 +3211,17 @@ body {
 
     .footer-content {
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: flex-start;
         padding: 0;
+        width: 100%;
     }
 
     .footer-section {
         text-align: left;
         margin: 0;
         padding: 0;
+        width: 50%;
     }
 
     .footer-section h3 {
@@ -3228,17 +3230,17 @@ body {
     }
 
     .social-section {
-        margin-left: auto;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+        width: 50%;
     }
 
     .social-links {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        gap: 0.5rem;
+        gap: 1rem;
     }
 
     .social-links h3 {
