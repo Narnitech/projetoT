@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nossos Serviços - Narnitech</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="video-controls.js" defer></script>
+</head>
+<body class="services-page">
+    <nav class="navbar">
+        <div class="logo">Narnitech</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-item"><span>Home</span></a></li>
+            <li><a href="services.html" class="nav-item"><span>Serviços</span></a></li>
+            <li><a href="portfolio.html" class="nav-item"><span>Portfólio</span></a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <section class="hero section-separator">
+        <div class="video-container">
+            <video autoplay muted loop playsinline>
+                <source src="images/videopi.mp4" type="video/mp4">
+                Seu navegador não suporta vídeo HTML5.
+            </video>
+        </div>
+        <div class="video-overlay"></div>
+        <div class="hero-content">
+            <h1>Nossos Serviços</h1>
+            <p>Descubra aqui porque somos a melhor solução para fazer seu sonho uma realidade digital</p>
+        </div>
+    </section>
+
+    <section class="services-page section-separator section-with-margin">
+        <div class="service-category">
+            <h2>Desenvolvimento Web</h2>
+            <div class="service-grid">
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-code"></i></div>
+                    <h3>Desenvolvimento Frontend</h3>
+                    <p>Criação de interfaces modernas e interativas</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-server"></i></div>
+                    <h3>Desenvolvimento Backend</h3>
+                    <p>Sistemas robustos e escaláveis</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-database"></i></div>
+                    <h3>Banco de Dados</h3>
+                    <p>Gerenciamento eficiente de dados</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-search"></i></div>
+                    <h3>SEO</h3>
+                    <p>Otimização para motores de busca para melhorar o posicionamento.</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Otimização para Google</h3>
+                    <div class="service-content">
+                        <div class="service-text-wrapper">
+                            <p class="service-text">Durante o desenvolvimento, levamos estritamente a sério às diretrizes e critérios do Google. Seu site será entregue totalmente otimizado para os motores de busca, potencializando suas chances de alcançar a primeira página do Google em um curto período.</p>
+                        </div>
+                        <button class="read-more-btn" onclick="{
+                            this.textContent = this.textContent === 'Ler mais' ? 'Ler menos' : 'Ler mais';
+                            const card = this.closest('.service-item');
+                            const textWrapper = card.querySelector('.service-text-wrapper');
+                            textWrapper.classList.toggle('expanded');
+                            card.classList.toggle('expanded');
+                        }">Ler mais</button>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-cog"></i></div>
+                    <h3>Administração</h3>
+                    <p>Painel administrativo intuitivo para gerenciar conteúdo e funcionalidades.</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Segurança</h3>
+                    <p>Proteção avançada contra ameaças e vulnerabilidades</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-comments"></i></div>
+                    <h3>Integrações</h3>
+                    <p>Conexão com redes sociais, e-commerces e outros serviços.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-category section-separator section-with-margin">
+        <h2>Design e UX</h2>
+        <div class="service-grid">
+            <div class="service-item">
+                <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3>Responsividade</h3>
+                <div class="service-content">
+                    <div class="service-text-wrapper">
+                        <p class="service-text">Você sabia que o Google penaliza websites que não oferecem uma boa experiência em smartphones e tablets? Por isso, desenvolvemos sites garantindo versões específicas para cada dispositivo: PC, tablet e smartphone. Assim, sua presença online se destaca positivamente em todas as plataformas.</p>
+                    </div>
+                    <button class="read-more-btn" onclick="{
+                        this.textContent = this.textContent === 'Ler mais' ? 'Ler menos' : 'Ler mais';
+                        const card = this.closest('.service-item');
+                        const textWrapper = card.querySelector('.service-text-wrapper');
+                        textWrapper.classList.toggle('expanded');
+                    }">Ler mais</button>
+                </div>
+            </div>
+            <div class="service-item">
+                <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                <h3>Design Moderno</h3>
+                <p>Interfaces elegantes, modernas e intuitivas</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                <h3>Personalização Completa</h3>
+                <div class="service-content">
+                    <div class="service-text-wrapper">
+                        <p class="service-text">Nossa abordagem é artesanal na criação de site, oferecendo layouts exclusivos que representam a sua marca. Priorizamos uma estética bonita e moderna para transmitir confiança aos seus visitantes. Desde formas e cores até imagens e ícones, cada elemento é pensado nos mínimos detalhes para o seu projeto.</p>
+                    </div>
+                    <button class="read-more-btn" onclick="{
+                        this.textContent = this.textContent === 'Ler mais' ? 'Ler menos' : 'Ler mais';
+                        const card = this.closest('.service-item');
+                        const textWrapper = card.querySelector('.service-text-wrapper');
+                        textWrapper.classList.toggle('expanded');
+                    }">Ler mais</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Narnitech</h3>
+                <p>Soluções Web de Alta Performance</p>
+            </div>
+            <div class="footer-section">
+                <h3>Siga-nos</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="copyright">&copy; 2025 Narnitech. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

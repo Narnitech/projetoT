@@ -1,0 +1,50 @@
+# Registro de Alterações de Segurança - Narnitech
+
+## Data: 29/05/2025
+
+### Melhorias de Segurança Implementadas:
+
+1. **Proteções contra Injeção de Código**
+   - Implementação de proteções contra SQL Injection
+   - Bloqueio de funções perigosas (exec, system, shell_exec, etc.)
+   - Proteção contra codificação base64
+   - Proteção contra funções de execução de código
+
+2. **Proteções contra Arquivos Sensíveis**
+   - Bloqueio de arquivos de backup (bak, old, backup)
+   - Proteção de arquivos de configuração (config, conf, cnf, yml, yaml, json, env)
+   - Bloqueio de arquivos de controle (.htaccess, .htpasswd)
+   - Proteção de arquivos de versionamento (.git, .svn)
+   - Bloqueio de arquivos de log
+
+3. **Proteções contra Ataques de Rede**
+   - Limitação de tamanho de upload (10MB)
+   - Bloqueio de IP's maliciosos
+   - Proteção contra bots e scrapers
+   - Bloqueio de user agents suspeitos
+
+4. **Proteções contra XSS e CSRF**
+   - Proteção contra injeção de JavaScript
+   - Bloqueio de manipulação de cookies
+   - Proteção contra manipulação de window.location
+
+5. **Proteções contra DDoS**
+   - Limitação de requisições
+   - Bloqueio de bots maliciosos
+   - Proteção contra varredura de diretórios
+
+6. **Otimizações de Performance**
+   - Compressão de arquivos de texto
+   - Exclusão de compressão para arquivos já comprimidos
+   - Headers de compressão otimizados
+
+### Correções Realizadas:
+- Remoção de duplicações em proteções contra base64
+- Reorganização de proteções contra bots maliciosos
+- Correção de ordem de diretivas no arquivo .htaccess
+- Melhorias na organização do código para melhor legibilidade
+
+### Status:
+- Todas as alterações foram implementadas e testadas
+- Backup do arquivo original foi criado
+- Sistema está funcionando com todas as proteções ativas
