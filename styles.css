@@ -3253,6 +3253,16 @@ body {
         gap: 1.5rem !important;
     }
 
+    .social-icons a {
+        font-size: 1.5rem !important;
+        color: var(--secondary-color) !important;
+        transition: var(--transition) !important;
+    }
+
+    .social-icons a:hover {
+        color: var(--primary-color) !important;
+    }
+
     .footer-bottom {
         text-align: center !important;
         padding: 1rem !important;
