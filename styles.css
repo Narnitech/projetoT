@@ -3237,17 +3237,17 @@ body {
         margin-left: auto;
     }
 
+    .social-section h3 {
+        font-size: 1rem;
+        margin: 0;
+        padding: 0;
+    }
+
     .social-links {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
         gap: 1rem;
-    }
-
-    .social-links h3 {
-        font-size: 1rem;
-        margin: 0;
-        padding: 0;
     }
 
     .social-icons {
