@@ -3246,65 +3246,55 @@ body {
 
 @media (max-width: 768px) {
     .footer {
-        height: auto !important;
-        padding: 2rem 1rem !important;
-        display: block !important;
-    }
-
-    .footer-container {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: flex-start !important;
-        padding: 0 !important;
+        height: auto;
+        padding: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
     }
 
     .footer-content {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: flex-start !important;
-        padding: 0 !important;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 0;
     }
 
     .footer-section {
-        width: 50% !important;
-        text-align: left !important;
-        margin: 0 !important;
-        padding: 0 !important;
+        width: 50%;
+        text-align: left;
+        margin: 0;
+        padding: 0;
     }
 
     .footer-section h3 {
-        font-size: 1.5rem !important;
-        margin-bottom: 1rem !important;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .footer-section:last-child {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
     }
 
     .social-links {
-        display: flex !important;
-        justify-content: flex-end !important;
-        gap: 1.5rem !important;
-        margin-top: 1rem !important;
-        padding: 0 !important;
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 1rem;
+        padding: 0;
     }
 
     .footer-bottom {
-        text-align: center !important;
-        padding: 1rem !important;
-        margin-top: 2rem !important;
-        border-top: 1px solid #333 !important;
-        width: 100% !important;
+        text-align: center;
+        padding: 1rem;
+        margin-top: 2rem;
+        border-top: 1px solid #333;
+        width: 100%;
     }
 
     .footer-bottom p {
-        font-size: 0.8rem !important;
-        margin: 0.5rem 0 !important;
-    }
-
-    .footer-logo {
-        position: static !important;
-    }
-
-    .footer-logo-img {
-        width: auto !important;
-        height: auto !important;
+        font-size: 0.8rem;
+        margin: 0.5rem 0;
     }
 }
     align-items: center;
