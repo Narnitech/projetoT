@@ -3207,11 +3207,12 @@ body {
     .footer {
         height: auto;
         padding: 2rem 1rem;
+        position: relative;
     }
 
     .footer-content {
         display: flex;
-        justify-content: flex-end;
+        justify-content: flex-start;
         align-items: flex-start;
         padding: 0;
         width: 100%;
@@ -3229,12 +3230,9 @@ body {
     }
 
     .social-section {
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-start;
-        width: 100%;
-        margin-left: auto;
-        padding-right: 2rem;
+        position: absolute;
+        right: 1rem;
+        top: 0;
     }
 
     .social-content {
