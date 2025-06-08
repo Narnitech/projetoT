@@ -3211,7 +3211,7 @@ body {
 
     .footer-content {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         align-items: flex-start;
         padding: 0;
         width: 100%;
@@ -3234,6 +3234,7 @@ body {
         align-items: flex-start;
         width: 100%;
         margin-left: auto;
+        padding-right: 2rem;
     }
 
     .social-content {
@@ -3241,7 +3242,6 @@ body {
         flex-direction: column;
         align-items: flex-end;
         gap: 1rem;
-        padding-right: 1rem;
     }
 
     .social-section h3 {
