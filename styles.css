@@ -3204,15 +3204,19 @@ body {
 }
 
 @media (max-width: 768px) {
+    .footer {
+        padding: 2rem 1rem;
+    }
+
     .footer-content {
         flex-direction: column;
         gap: 2rem;
-        padding: 2rem 1rem;
+        align-items: center;
     }
 
     .footer-section {
         text-align: center;
-        margin: 0 auto;
+        width: 100%;
     }
 
     .footer-section h3 {
@@ -3220,27 +3224,11 @@ body {
         margin-bottom: 1rem;
     }
 
-    .follow-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-        margin: 0 auto;
-        padding: 0;
-    }
-
-    .follow-text {
-        font-size: 1rem;
-        margin: 0;
-        padding: 0;
-    }
-
     .social-links {
         display: flex;
-        gap: 1rem;
-        margin: 0;
-        padding: 0;
+        gap: 1.5rem;
         justify-content: center;
+        margin-top: 1rem;
     }
 
     .footer-bottom {
