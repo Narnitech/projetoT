@@ -3230,13 +3230,15 @@ body {
     .social-section {
         margin-left: auto;
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        align-items: flex-end;
     }
 
     .social-links {
         display: flex;
-        align-items: center;
-        gap: 1.5rem;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1rem;
     }
 
     .social-links h3 {
@@ -3247,7 +3249,6 @@ body {
 
     .social-icons {
         display: flex;
-        align-items: center;
         gap: 1.5rem;
     }
 
