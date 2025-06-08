@@ -1,0 +1,701 @@
+# Configuração básica do Apache
+Options -Indexes
+AllowOverride All
+Order allow,deny
+Allow from all
+
+# Ativa o módulo de rewrite
+RewriteEngine On
+
+# Redireciona para o index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.html [L]
+
+# Limita o tamanho máximo de upload
+LimitRequestBody 10240000
+
+# Proteção contra arquivos de backup e configuração
+<FilesMatch "\.(bak|save|old|backup|sql|db|log|txt|config|conf|cnf|yml|yaml|json|env|htaccess|htpasswd|git|svn)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Proteção contra DDoS e Bots Maliciosos - Etapa 3
+
+# Proteção contra bots maliciosos e scrapers
+RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
+RewriteCond %{HTTP_USER_AGENT} ^- [OR]
+RewriteCond %{HTTP_USER_AGENT} ^curl [OR]
+RewriteCond %{HTTP_USER_AGENT} ^wget [OR]
+RewriteCond %{HTTP_USER_AGENT} ^python-urllib [OR]
+RewriteCond %{HTTP_USER_AGENT} ^libwww-perl [OR]
+RewriteCond %{HTTP_USER_AGENT} ^bot [OR]
+RewriteCond %{HTTP_USER_AGENT} ^spider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^crawl [OR]
+RewriteCond %{HTTP_USER_AGENT} ^slurp [OR]
+RewriteCond %{HTTP_USER_AGENT} ^java [OR]
+RewriteCond %{HTTP_USER_AGENT} ^perl [OR]
+RewriteCond %{HTTP_USER_AGENT} ^php [OR]
+RewriteCond %{HTTP_USER_AGENT} ^ruby [OR]
+RewriteCond %{HTTP_USER_AGENT} ^python [OR]
+RewriteCond %{HTTP_USER_AGENT} ^go-http-client [OR]
+RewriteCond %{HTTP_USER_AGENT} ^node-fetch [OR]
+RewriteCond %{HTTP_USER_AGENT} ^axios [OR]
+RewriteCond %{HTTP_USER_AGENT} ^okhttp [OR]
+RewriteCond %{HTTP_USER_AGENT} ^httpclient [OR]
+RewriteCond %{HTTP_USER_AGENT} ^curl.*\(.*\) [OR]
+RewriteCond %{HTTP_USER_AGENT} ^wget.*\(.*\) [NC]
+
+# Proteção contra varredura de diretórios
+RewriteCond %{REQUEST_URI} ^/wp-admin/ [OR]
+RewriteCond %{REQUEST_URI} ^/wp-content/ [OR]
+RewriteCond %{REQUEST_URI} ^/wp-includes/ [OR]
+RewriteCond %{REQUEST_URI} ^/admin/ [OR]
+RewriteCond %{REQUEST_URI} ^/includes/ [OR]
+RewriteCond %{REQUEST_URI} ^/system/ [OR]
+RewriteCond %{REQUEST_URI} ^/config/ [NC]
+RewriteRule .* - [F]
+
+# Proteção contra varredura de arquivos
+RewriteCond %{REQUEST_URI} \.(htaccess|htpasswd|ini|log|sql|sh|bash|pl|py|phps|bak|old|inc|conf|cnf|yml|yaml)$ [NC]
+RewriteRule .* - [F]
+
+# Proteção contra varredura de extensões
+RewriteCond %{QUERY_STRING} \.(htaccess|htpasswd|ini|log|sql|sh|bash|pl|py|phps|bak|old|inc|conf|cnf|yml|yaml)$ [NC]
+RewriteRule .* - [F]
+
+# Proteção contra DDoS usando mod_evasive
+<IfModule mod_evasive20.c>
+    DOSHashTableSize    3097
+    DOSPageCount        2
+    DOSSiteCount        50
+    DOSPageInterval     1
+    DOSSiteInterval     1
+    DOSBlockingPeriod   10
+    DOSEmailNotify      admin@narnitech.com.br
+    DOSWhitelist        127.0.0.1
+    DOSBlockingPeriod   600
+    DOSLogDir           "/var/log/httpd/mod_evasive"
+    DOSLimitURI         "/login.php /wp-login.php /admin.php /auth.php"
+    
+    # Proteção contra varredura de diretórios
+    DOSLimitURI         "/wp-admin/ /wp-content/ /wp-includes/"
+    
+    # Proteção contra varredura de arquivos
+    DOSLimitURI         "/.htaccess /robots.txt /sitemap.xml"
+</IfModule>
+
+# Proteção contra requisições muito rápidas
+<IfModule mod_evasive20.c>
+    DOSPageCount        5
+    DOSPageInterval     1
+    DOSSiteCount        100
+    DOSSiteInterval     1
+    DOSBlockingPeriod   600
+</IfModule>
+
+# Proteção contra DDoS usando mod_evasive
+<IfModule mod_evasive20.c>
+    DOSHashTableSize    3097
+    DOSPageCount        2
+    DOSSiteCount        50
+    DOSPageInterval     1
+    DOSSiteInterval     1
+    DOSBlockingPeriod   10
+    DOSEmailNotify      admin@narnitech.com.br
+    DOSWhitelist        127.0.0.1
+</IfModule>
+
+# Configurações de Segurança Adicionais - Etapa 5
+
+# Proteção contra ataques de força bruta
+<IfModule mod_security.c>
+    SecFilterEngine On
+    SecFilterScanPOST On
+    
+    # Proteção contra brute force em login
+    SecFilter "login.php"
+    SecFilter "wp-login.php"
+    SecFilter "admin.php"
+    SecFilter "auth.php"
+    SecFilter "signin.php"
+    SecFilter "sign-in.php"
+    SecFilter "sign-in"
+    
+    # Limite de tentativas de login
+    SecFilter "POST /login"
+    SecFilter "POST /admin"
+    SecFilter "POST /auth"
+    SecFilter "POST /signin"
+    SecFilter "POST /sign-in"
+    SecFilter "POST /login.php"
+    SecFilter "POST /admin.php"
+    SecFilter "POST /auth.php"
+    SecFilter "POST /signin.php"
+    SecFilter "POST /sign-in.php"
+    
+    # Proteção contra tentativas de exploração de arquivos
+    SecFilter "\.htaccess"
+    SecFilter "\.htpasswd"
+    SecFilter "\.git"
+    SecFilter "\.svn"
+    SecFilter "\.gitignore"
+    SecFilter "\.gitattributes"
+    SecFilter "\.gitmodules"
+    
+    # Proteção contra tentativas de exploração de arquivos de configuração
+    SecFilter "config\.php"
+    SecFilter "database\.php"
+    SecFilter "\.env"
+    SecFilter "\.ini"
+    SecFilter "\.json"
+    SecFilter "\.yml"
+    SecFilter "\.yaml"
+    
+    # Proteção contra tentativas de exploração de arquivos de backup
+    SecFilter "\.bak"
+    SecFilter "\.save"
+    SecFilter "\.old"
+    SecFilter "\.backup"
+    SecFilter "\.sql"
+    SecFilter "\.db"
+    SecFilter "\.sqlite"
+    
+    # Proteção contra tentativas de exploração de arquivos de log
+    SecFilter "\.log"
+    SecFilter "access\.log"
+    SecFilter "error\.log"
+    SecFilter "php\.log"
+    SecFilter "mysql\.log"
+    SecFilter "/admin-panel/"
+    SecFilter "/dashboard/"
+    
+    # Proteção contra tentativas de exploração
+    SecFilter "wp-content/plugins"
+    SecFilter "wp-content/themes"
+    SecFilter "wp-content/uploads"
+    SecFilter "system/"
+    SecFilter "config/"
+    SecFilter "database/"
+    
+    # Proteção contra tentativas de upload
+    SecFilter "upload.php"
+    SecFilter "upload.html"
+    SecFilter "upload/"
+    SecFilter "file-upload/"
+    
+    # Proteção contra injeção de código
+    SecFilter "base64_decode"
+    SecFilter "eval"
+    SecFilter "exec"
+    SecFilter "system"
+    SecFilter "shell_exec"
+    SecFilter "passthru"
+    SecFilter "popen"
+    SecFilter "proc_open"
+    SecFilter "pcntl_exec"
+    SecFilter "assert"
+    SecFilter "create_function"
+    SecFilter "exec\("
+    SecFilter "system\("
+    SecFilter "shell_exec\("
+    SecFilter "passthru\("
+    SecFilter "popen\("
+    SecFilter "proc_open\("
+    SecFilter "pcntl_exec\("
+    SecFilter "assert\("
+    SecFilter "create_function\("
+    SecFilter "exec\("
+    SecFilter "system\("
+    SecFilter "shell_exec\("
+    SecFilter "passthru\("
+    SecFilter "popen\("
+    SecFilter "proc_open\("
+    SecFilter "pcntl_exec\("
+    SecFilter "assert\("
+    SecFilter "create_function\("
+    
+    # Proteção contra injeção de SQL
+    SecFilter "union.*select"
+    SecFilter "select.*from"
+    SecFilter "insert.*into"
+    SecFilter "delete.*from"
+    SecFilter "update.*set"
+    SecFilter "drop.*table"
+    SecFilter "truncate.*table"
+    SecFilter "alter.*table"
+    SecFilter "rename.*table"
+    SecFilter "create.*table"
+    SecFilter "drop.*database"
+    SecFilter "create.*database"
+    
+    # Proteção contra injeção de JavaScript
+    SecFilter "<script"
+    SecFilter "javascript:"
+    SecFilter "vbscript:"
+    SecFilter "onload="
+    SecFilter "onerror="
+    SecFilter "onclick="
+    SecFilter "onmouseover="
+    SecFilter "document.write"
+    SecFilter "document.cookie"
+    SecFilter "window.location"
+    SecFilter "eval\("
+    SecFilter "unescape\("
+    
+    # Proteção contra injeção de HTML
+    SecFilter "<iframe"
+    SecFilter "<object"
+    SecFilter "<embed"
+    SecFilter "<applet"
+    SecFilter "<meta"
+    SecFilter "<link"
+    SecFilter "<style"
+    SecFilter "<script"
+    SecFilter "<body"
+    SecFilter "<html"
+    
+    # Proteção contra injeção de CSS
+    SecFilter "expression\("
+    SecFilter "url\("
+    SecFilter "behavior\:"
+    SecFilter "filter\:"
+    SecFilter "progid\:"
+    SecFilter "\-moz\-binding\:"
+    
+    # Proteção contra injeção de PHP
+    SecFilter "php\:"
+    SecFilter "\$\{"
+    SecFilter "\$\_GET\["
+    SecFilter "\$\_POST\["
+    SecFilter "\$\_COOKIE\["
+    SecFilter "\$\_SESSION\["
+    SecFilter "\$\_SERVER\["
+    SecFilter "\$\_REQUEST\["
+    SecFilter "\$\_ENV\["
+    SecFilter "\$GLOBALS\["
+    
+    # Proteção contra injeção de SQL avançada
+    SecFilter "\(select.*from.*where\)"
+    SecFilter "\(update.*set.*where\)"
+    SecFilter "\(delete.*from.*where\)"
+    SecFilter "\(insert.*into.*values\)"
+    SecFilter "\(create.*table\)"
+    SecFilter "\(drop.*table\)"
+    SecFilter "\(truncate.*table\)"
+    SecFilter "\(alter.*table\)"
+    SecFilter "\(rename.*table\)"
+    
+    # Proteção contra injeção de dados
+    SecFilter "base64_encode"
+    SecFilter "base64_decode"
+    SecFilter "eval\("
+    SecFilter "preg_replace"
+    SecFilter "\(document\.cookie\)"
+    SecFilter "\(document\.location\)"
+    SecFilter "\(window\.location\)"
+    
+    # Proteção contra injeção de XML
+    SecFilter "<\?xml"
+    SecFilter "<\!DOCTYPE"
+    SecFilter "<\!ENTITY"
+    SecFilter "<\!ATTLIST"
+    SecFilter "<\!ELEMENT"
+    SecFilter "<\!NOTATION"
+    
+    # Proteção contra injeção de JSON
+    SecFilter "\{\""
+    SecFilter "\[\{"
+    SecFilter "\}\]"
+    SecFilter "\:\:"
+    SecFilter "upload.php"
+    SecFilter "uploadify.php"
+    SecFilter "uploadify.pl"
+    
+    # Proteção contra tentativas de exploração de arquivos
+    SecFilter "wp-config.php"
+    SecFilter "config.php"
+    SecFilter "database.php"
+    SecFilter ".htaccess"
+    SecFilter ".htpasswd"
+    
+    # Proteção contra tentativas de exploração de diretórios
+    SecFilter "wp-admin/"
+    SecFilter "wp-includes/"
+    SecFilter "wp-content/"
+</IfModule>
+
+# Proteção contra ataques de força bruta
+<IfModule mod_evasive20.c>
+    DOSHashTableSize    3097
+    DOSPageCount        2
+    DOSSiteCount        50
+    DOSPageInterval     1
+    DOSSiteInterval     1
+    DOSBlockingPeriod   10
+    DOSEmailNotify      admin@narnitech.com.br
+    DOSWhitelist        127.0.0.1
+    
+    # Configurações adicionais para força bruta
+    DOSBlockingPeriod   300
+    DOSSiteCount        150
+    DOSPageCount        5
+    DOSPageInterval     1
+    
+    # Proteção contra bots maliciosos
+    DOSWhitelist        127.0.0.1
+    DOSWhitelist        ::1
+    
+    # Proteção contra IP maliciosos
+    DOSBlacklist        192.168.1.1
+    DOSBlacklist        10.0.0.1
+    DOSBlacklist        172.16.0.1
+</IfModule>
+
+# Proteção contra uploads maliciosos
+<IfModule mod_security.c>
+    SecFilter "php"
+    SecFilter "asp"
+    SecFilter "jsp"
+    SecFilter "pl"
+    SecFilter "py"
+    SecFilter "sh"
+    SecFilter "bat"
+    SecFilter "cmd"
+    SecFilter "exe"
+    SecFilter "dll"
+    SecFilter "vbs"
+    SecFilter "js"
+    SecFilter "svg"
+    SecFilter "htaccess"
+    SecFilter "htpasswd"
+    SecFilter "config"
+    SecFilter "ini"
+    SecFilter "json"
+    SecFilter "xml"
+    SecFilter "sql"
+    SecFilter "php[0-9]"
+    SecFilter "php[3-4]"
+    SecFilter "php5"
+    SecFilter "phtml"
+</IfModule>
+
+# Proteção contra requisições maliciosas
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK) [NC]
+    RewriteRule ^(.*)$ - [F]
+    
+    RewriteCond %{HTTP:Range} ^bytes=\d+-$ [NC]
+    RewriteCond %{HTTP:Range} !^bytes=0-0$ [NC]
+    RewriteRule ^(.*)$ - [F]
+    
+    RewriteCond %{HTTP:Content-Length} ^-?0$ [NC]
+    RewriteCond %{HTTP:Content-Length} !^$ [NC]
+    RewriteRule ^(.*)$ - [F]
+    
+    RewriteCond %{HTTP:Transfer-Encoding} chunked [NC]
+    RewriteCond %{HTTP:Content-Length} !^$ [NC]
+    RewriteRule ^(.*)$ - [F]
+</IfModule>
+
+# Proteção contra injeção de código em queries
+<IfModule mod_rewrite.c>
+    RewriteCond %{QUERY_STRING} base64_encode.*\(.*) [OR]
+    RewriteCond %{QUERY_STRING} (<|%3C).*script.*>(%3C|<) [NC,OR]
+    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|%) [OR]
+    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|%) [OR]
+    RewriteCond %{QUERY_STRING} etc/passwd [NC,OR]
+    RewriteCond %{QUERY_STRING} cgi-bin [NC,OR]
+    RewriteCond %{QUERY_STRING} 127\.0 [NC,OR]
+    RewriteCond %{QUERY_STRING} 0\.0\.0\.0 [NC,OR]
+    RewriteCond %{QUERY_STRING} 0:0:0:0:0:0:0:1 [NC,OR]
+    RewriteCond %{QUERY_STRING} ::1 [NC]
+    RewriteRule ^(.*)$ - [F]
+</IfModule>
+
+# Proteção contra explorações de vulnerabilidades
+<IfModule mod_rewrite.c>
+    # Proteção contra RCE (Remote Code Execution)
+    RewriteCond %{QUERY_STRING} (eval\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (system\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (exec\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (passthru\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (shell_exec\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (popen\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (proc_open\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (assert\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (preg_replace\(/e) [NC,OR]
+    RewriteCond %{QUERY_STRING} (base64_decode\() [NC]
+    RewriteRule ^(.*)$ - [F]
+    
+    # Proteção contra LFI (Local File Inclusion)
+    RewriteCond %{QUERY_STRING} (\.{2}/|\.\.\\) [NC,OR]
+    RewriteCond %{QUERY_STRING} (etc/passwd|etc/shadow|etc/group) [NC,OR]
+    RewriteCond %{QUERY_STRING} (wp-config.php|config.php|database.php) [NC]
+    RewriteRule ^(.*)$ - [F]
+    
+    # Proteção contra RFI (Remote File Inclusion)
+    RewriteCond %{QUERY_STRING} (http://|https://) [NC,OR]
+    RewriteCond %{QUERY_STRING} (ftp://) [NC,OR]
+    RewriteCond %{QUERY_STRING} (file://) [NC]
+    RewriteRule ^(.*)$ - [F]
+    
+    # Proteção contra SQL Injection
+    RewriteCond %{QUERY_STRING} (union.*select.*\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (union.*all.*select.*\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (concat.*\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (substring.*\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (mid.*\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (left.*\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (right.*\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (group_concat.*\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (hex.*\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (unhex.*\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (char.*\() [NC,OR]
+    RewriteCond %{QUERY_STRING} (chr.*\() [NC]
+    RewriteRule ^(.*)$ - [F]
+</IfModule>
+
+# Proteção contra ataques de rede
+<IfModule mod_rewrite.c>
+    # Proteção contra scan de portas
+    RewriteCond %{HTTP:X-Forwarded-For} ^$ [OR]
+    RewriteCond %{HTTP:X-Forwarded-For} ^0\.0\.0\.0$ [OR]
+    RewriteCond %{HTTP:X-Forwarded-For} ^127\.0\.0\.1$ [OR]
+    RewriteCond %{HTTP:X-Forwarded-For} ^::1$ [NC]
+    RewriteRule ^(.*)$ - [F]
+    
+    # Proteção contra IP maliciosos
+    RewriteCond %{REMOTE_ADDR} ^192\.168\.1\.1$ [OR]
+    RewriteCond %{REMOTE_ADDR} ^10\.0\.0\.1$ [OR]
+    RewriteCond %{REMOTE_ADDR} ^172\.16\.0\.1$ [OR]
+    RewriteCond %{REMOTE_ADDR} ^127\.0\.0\.1$ [OR]
+    RewriteCond %{REMOTE_ADDR} ^::1$ [NC]
+    RewriteRule ^(.*)$ - [F]
+    
+    # Proteção contra requisições inválidas
+    RewriteCond %{HTTP:Content-Length} ^-?0$ [NC]
+    RewriteCond %{HTTP:Content-Length} !^$ [NC]
+    RewriteRule ^(.*)$ - [F]
+    
+    # Proteção contra headers inválidos
+    RewriteCond %{HTTP:User-Agent} ^$ [OR]
+    RewriteCond %{HTTP:User-Agent} ^- [OR]
+    RewriteCond %{HTTP:User-Agent} ^curl [OR]
+    RewriteCond %{HTTP:User-Agent} ^wget [OR]
+    RewriteCond %{HTTP:User-Agent} ^python-urllib [OR]
+    RewriteCond %{HTTP:User-Agent} ^libwww-perl [NC]
+    RewriteRule ^(.*)$ - [F]
+</IfModule>
+<IfModule mod_rewrite.c>
+    RewriteCond %{QUERY_STRING} base64_encode.*\(.*) [OR]
+    RewriteCond %{QUERY_STRING} (<|%3C).*script.*>(%3C|<) [NC,OR]
+    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|%) [OR]
+    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|%) [OR]
+    RewriteCond %{QUERY_STRING} etc/passwd [NC,OR]
+    RewriteCond %{QUERY_STRING} cgi-bin [NC,OR]
+    RewriteCond %{QUERY_STRING} 127\.0 [NC,OR]
+    RewriteCond %{QUERY_STRING} 0\.0\.0\.0 [NC,OR]
+    RewriteCond %{QUERY_STRING} 0:0:0:0:0:0:0:1 [NC,OR]
+    RewriteCond %{QUERY_STRING} ::1 [NC]
+    RewriteRule ^(.*)$ - [F]
+</IfModule>
+
+# Proteção contra injeção de código em headers
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP:User-Agent} (<|%3C).*script.*>(%3C|<) [NC,OR]
+    RewriteCond %{HTTP:User-Agent} GLOBALS(=|\[|%) [OR]
+    RewriteCond %{HTTP:User-Agent} _REQUEST(=|\[|%) [OR]
+    RewriteCond %{HTTP:User-Agent} etc/passwd [NC,OR]
+    RewriteCond %{HTTP:User-Agent} cgi-bin [NC,OR]
+    RewriteCond %{HTTP:User-Agent} 127\.0 [NC,OR]
+    RewriteCond %{HTTP:User-Agent} 0\.0\.0\.0 [NC,OR]
+    RewriteCond %{HTTP:User-Agent} 0:0:0:0:0:0:0:1 [NC,OR]
+    RewriteCond %{HTTP:User-Agent} ::1 [NC]
+    RewriteRule ^(.*)$ - [F]
+</IfModule>
+
+# Proteção contra hotlinking
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?narnitech\.com\.br/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?narnitech\.com\.br$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?narnitech\.com\.br.*$      [NC]
+RewriteRule \.(jpg|jpeg|png|gif|bmp)$ - [F,NC]
+
+# Proteção contra scraping
+<IfModule mod_headers.c>
+    Header set X-Robots-Tag "noindex, nofollow"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-Permitted-Cross-Domain-Policies "none"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</IfModule>
+
+# Limite de requisições por IP
+<IfModule mod_limitipconn.c>
+    MaxConnPerIP 10
+    NoIPLimit img
+    NoIPLimit css
+    NoIPLimit js
+</IfModule>
+
+# Proteção contra requisições rápidas
+<IfModule mod_ratelimit.c>
+    RLimitMEM 1000000
+    RLimitCPU 1000000
+    RLimitNPROC 100
+</IfModule>
+
+# Proteção contra bots maliciosos
+RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
+RewriteCond %{HTTP_USER_AGENT} ^- [OR]
+RewriteCond %{HTTP_USER_AGENT} ^curl [OR]
+RewriteCond %{HTTP_USER_AGENT} ^wget [OR]
+RewriteCond %{HTTP_USER_AGENT} ^python-urllib [OR]
+RewriteCond %{HTTP_USER_AGENT} ^libwww-perl [NC]
+RewriteRule .* - [F]
+
+# Proteção contra injeção de código
+<FilesMatch "\.(php|pl|py|jsp|asp|aspx|sh|cgi)$">
+    SetHandler application/x-httpd-php
+    php_flag engine off
+</FilesMatch>
+
+# Proteção contra exploração de vulnerabilidades
+<IfModule mod_security.c>
+    SecFilterEngine On
+    SecFilterScanPOST On
+    SecFilter "delete[[:space:]]+from"
+    SecFilter "insert[[:space:]]+into"
+    SecFilter "select.*from"
+    SecFilter "union.*select"
+    SecFilter "drop.*table"
+    SecFilter "update.*set"
+</IfModule>
+
+# Proteção contra DDoS
+<IfModule mod_evasive20.c>
+    DOSHashTableSize    3097
+    DOSPageCount        2
+    DOSSiteCount        50
+    DOSPageInterval     1
+    DOSSiteInterval     1
+    DOSBlockingPeriod   10
+</IfModule>
+
+# Configurações de Cache e Compressão - Etapa 4
+
+# Configurações de Cache
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Cache para imagens
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    
+    # Cache para arquivos estáticos
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-javascript "access plus 1 month"
+    
+    # Cache para fontes
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    ExpiresByType application/font-ttf "access plus 1 year"
+    ExpiresByType application/font-otf "access plus 1 year"
+    ExpiresByType application/font-eot "access plus 1 year"
+    
+    # Cache para arquivos de áudio e vídeo
+    ExpiresByType audio/mpeg "access plus 1 year"
+    ExpiresByType audio/mp4 "access plus 1 year"
+    ExpiresByType video/mp4 "access plus 1 year"
+    ExpiresByType video/webm "access plus 1 year"
+    ExpiresByType video/ogg "access plus 1 year"
+    
+    # Cache para arquivos PDF
+    ExpiresByType application/pdf "access plus 1 month"
+    
+    # Cache para arquivos XML
+    ExpiresByType application/xml "access plus 1 day"
+    ExpiresByType application/rss+xml "access plus 1 day"
+    
+    # Cache para arquivos HTML
+    ExpiresByType text/html "access plus 0 seconds"
+    
+    # Cache para arquivos JSON
+    ExpiresByType application/json "access plus 0 seconds"
+</IfModule>
+
+# Configurações de Compressão
+<IfModule mod_deflate.c>
+    # Ativa a compressão
+    SetOutputFilter DEFLATE
+    
+    # Comprime arquivos de texto
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
+    
+    # Não comprime imagens
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    
+    # Não comprime arquivos já comprimidos
+    SetEnvIfNoCase Request_URI \
+        \.pdf$|\.avi$|\.mov$|\.mp3$|\.mp4$|\.3gp$|\.m4a$|\.rm$|\.flv$|\.swf$|\.mpg$|\.mpeg$|\.wmv$|\.asf$|\.asx$|\.zip$|\.gz$|\.tgz$|\.bz2$|\.tbz$|\.rar$|\.7z$|\.tar$|\.iso$|\.wav$|\.wma$|\.ogg$|\.webm$|\.webp$|\.svg$|\.ttf$|\.otf$|\.woff$|\.woff2$|\.eot$|\.ico$|\.jpg$|\.jpeg$|\.png$|\.gif$ \
+        no-gzip dont-vary
+    
+    # Headers de compressão
+    Header append Vary User-Agent env=!dont-vary
+    Header append Cache-Control "public"
+    
+    # Limite de compressão
+    DeflateCompressionLevel 9
+    
+    # Proteção contra compressão maliciosa
+    BrowserMatch ^MSIE-5-5 gzip-only-text/html
+    BrowserMatch \bMSIE gzip-only-text/html
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    
+    # Não comprima arquivos menores que 1KB
+    DeflateFilterNote Input instream
+    DeflateFilterNote Output outstream
+    DeflateFilterNote Ratio ratio
+    Header append X-DeFLATE-Ratio %{ratio}n
+</IfModule>
+
+# Configurações de Cache para APIs
+<IfModule mod_headers.c>
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</IfModule>
+
+# Configurações de Cache para HTML
+<FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</FilesMatch>
+
+# Configurações de Cache para JSON
+<FilesMatch "\.json$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</FilesMatch>

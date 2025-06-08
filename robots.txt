@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://narnitech.com/sitemap.xml
+
+# Disallow crawling of specific directories
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Allow crawling of important directories
+Allow: /services.html
+Allow: /portfolio.html
+Allow: /contact.html
