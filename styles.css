@@ -3207,7 +3207,6 @@ body {
     .footer {
         height: auto;
         padding: 2rem 1rem;
-        position: relative;
     }
 
     .footer-content {
@@ -3222,6 +3221,7 @@ body {
         text-align: left;
         margin: 0;
         padding: 0;
+        width: 50%;
     }
 
     .footer-section h3 {
@@ -3230,9 +3230,11 @@ body {
     }
 
     .social-section {
-        position: absolute;
-        right: 1rem;
-        top: 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        width: 50%;
+        margin-left: auto;
     }
 
     .social-content {
