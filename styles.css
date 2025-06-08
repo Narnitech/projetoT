@@ -3235,6 +3235,7 @@ body {
         align-items: flex-end;
         width: 60%;
         margin-left: auto;
+        padding-right: 1rem;
     }
 
     .social-section h3 {
@@ -3253,6 +3254,7 @@ body {
     .social-icons {
         display: flex;
         gap: 1.5rem;
+        padding-right: 1rem;
     }
 
     .footer-bottom {
