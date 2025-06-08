@@ -3210,60 +3210,60 @@ body {
     }
 
     .footer-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        padding: 0;
-        width: 100%;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: flex-start !important;
+        padding: 0 !important;
+        width: 100% !important;
     }
 
     .footer-section {
-        text-align: left;
-        margin: 0;
-        padding: 0;
-        width: 40%;
+        text-align: left !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 40% !important;
     }
 
     .footer-section h3 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
+        font-size: 1.5rem !important;
+        margin-bottom: 1rem !important;
     }
 
     .social-section {
-        width: 60%;
-        margin-left: auto;
+        width: 60% !important;
+        margin-left: auto !important;
     }
 
     .social-content {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 1rem;
-        margin-right: 1rem;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-end !important;
+        gap: 1rem !important;
+        margin-right: 1rem !important;
     }
 
     .social-section h3 {
-        font-size: 1rem;
-        margin: 0;
-        padding: 0;
+        font-size: 1rem !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .social-icons {
-        display: flex;
-        gap: 1.5rem;
+        display: flex !important;
+        gap: 1.5rem !important;
     }
 
     .footer-bottom {
-        text-align: center;
-        padding: 1rem;
-        margin-top: 2rem;
-        border-top: 1px solid #333;
-        width: 100%;
+        text-align: center !important;
+        padding: 1rem !important;
+        margin-top: 2rem !important;
+        border-top: 1px solid #333 !important;
+        width: 100% !important;
     }
 
     .footer-bottom p {
-        font-size: 0.8rem;
-        margin: 0.5rem 0;
+        font-size: 0.8rem !important;
+        margin: 0.5rem 0 !important;
     }
 }
     align-items: center;
