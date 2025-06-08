@@ -3239,7 +3239,7 @@ body {
         flex-direction: column !important;
         align-items: flex-end !important;
         gap: 1rem !important;
-        margin-right: 1rem !important;
+        margin-right: 3rem !important;
     }
 
     .social-section h3 {
