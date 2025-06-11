@@ -1399,12 +1399,26 @@ body {
 }
 
 .portfolio-grid {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .portfolio-grid {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem 0;
+    }
+
+    .portfolio-item {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
 }
 
 .portfolio-item {
@@ -1412,10 +1426,6 @@ body {
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.3s ease;
-    width: 100%;
-    margin-bottom: 2rem;
-    display: block;
-    flex: 0 0 100%;
 }
 
 .portfolio-item:hover {
