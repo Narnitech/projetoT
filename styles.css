@@ -636,15 +636,25 @@ body.home-page {
     .nav-item {
         width: 100%;
         text-align: center;
-        padding: 0.5rem;
         color: var(--text-light);
         text-decoration: none;
+        font-weight: 500;
+        position: relative;
+    }
+
+    .nav-item a {
+        display: block;
+        padding: 0.5rem;
+        width: 100%;
+        text-decoration: none;
+        color: var(--text-light);
         font-weight: 500;
     }
 
     .nav-item span {
         display: block;
         padding: 0.5rem 0;
+        pointer-events: none;
     }
 
     .nav-item:hover {
