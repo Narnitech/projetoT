@@ -35,6 +35,10 @@ body.home-page {
     background-color: #1a1a1a;
 }
 
+body.portfolio-page {
+    background-color: #1a1a1a;
+}
+
 .services-page .hero {
     min-height: 100vh;
     display: flex;
