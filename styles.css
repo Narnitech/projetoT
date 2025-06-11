@@ -437,6 +437,26 @@ body.home-page {
 
 /* Menu mobile básico */
 @media (max-width: 768px) {
+    /* Reset de outlines e focos */
+    .navbar, .nav-links, .nav-item, .nav-item span, .hamburger {
+        outline: none !important;
+        outline-color: transparent !important;
+        outline-style: none !important;
+        outline-width: 0 !important;
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-focus-ring-color: transparent !important;
+        -webkit-focus-ring-color: rgba(0,0,0,0) !important;
+        -webkit-user-select: none !important;
+        user-select: none !important;
+        -webkit-touch-callout: none !important;
+        -webkit-text-size-adjust: none !important;
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        border: none !important;
+        background: none !important;
+        pointer-events: auto !important;
+    }
+
     .navbar {
         justify-content: space-between;
         padding: 1rem;
