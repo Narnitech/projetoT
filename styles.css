@@ -52,6 +52,28 @@ a, button, span, div, ul, li {
     pointer-events: auto !important;
 }
 
+/* Reset específico para o menu mobile do Chrome */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .nav-item, .nav-item span {
+        outline: none !important;
+        outline-color: transparent !important;
+        outline-style: none !important;
+        outline-width: 0 !important;
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-focus-ring-color: transparent !important;
+        -webkit-focus-ring-color: rgba(0,0,0,0) !important;
+        -webkit-user-select: none !important;
+        user-select: none !important;
+        -webkit-touch-callout: none !important;
+        -webkit-text-size-adjust: none !important;
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        border: none !important;
+        background: none !important;
+        pointer-events: auto !important;
+    }
+}
+
 :focus {
     outline: none !important;
 }
