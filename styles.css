@@ -640,20 +640,23 @@ body.home-page {
         text-decoration: none;
         font-weight: 500;
         position: relative;
+        padding: 0;
     }
 
     .nav-item a {
-        display: block;
+        display: inline-block;
         padding: 0.5rem;
-        width: 100%;
         text-decoration: none;
         color: var(--text-light);
         font-weight: 500;
+        background: none;
+        border: none;
+        cursor: pointer;
     }
 
     .nav-item span {
-        display: block;
-        padding: 0.5rem 0;
+        display: inline;
+        padding: 0;
         pointer-events: none;
     }
 
