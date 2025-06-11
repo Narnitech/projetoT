@@ -469,10 +469,23 @@ body.home-page {
 
     .nav-links a {
         outline: none !important;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-focus-ring-color: transparent;
+        -webkit-focus-ring-color: rgba(0,0,0,0);
     }
 
     .nav-links a:focus {
         outline: none !important;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-focus-ring-color: transparent;
+        -webkit-focus-ring-color: rgba(0,0,0,0);
+    }
+
+    .nav-links a:active {
+        outline: none !important;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-focus-ring-color: transparent;
+        -webkit-focus-ring-color: rgba(0,0,0,0);
     }
 
     .hamburger span {
