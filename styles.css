@@ -1366,6 +1366,10 @@ body {
     background-color: var(--dark-color);
 }
 
+.portfolio-page {
+    background-color: var(--dark-color) !important;
+}
+
 .portfolio-grid {
     display: flex !important;
     flex-direction: column !important;
