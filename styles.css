@@ -455,6 +455,7 @@ body.home-page {
         flex-direction: column;
         gap: 6px;
         cursor: pointer;
+        outline: none;
     }
 
     .hamburger span {
