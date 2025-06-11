@@ -438,6 +438,13 @@ body.home-page {
         gap: 1rem !important;
         flex-direction: column !important;
         z-index: 1001 !important;
+        position: fixed !important;
+        top: 60px !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: var(--dark-color) !important;
+        padding: 1rem !important;
+        display: none !important;
     }
 
     .nav-links.active {
@@ -448,50 +455,38 @@ body.home-page {
         width: 100% !important;
         text-align: center !important;
         padding: 0.5rem !important;
+        outline: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-focus-ring-color: transparent !important;
+        -webkit-focus-ring-color: rgba(0,0,0,0) !important;
+        -webkit-user-select: none !important;
+        user-select: none !important;
+        -webkit-touch-callout: none !important;
+        -webkit-text-size-adjust: none !important;
     }
 
     .nav-item span {
         display: block !important;
         padding: 0.5rem 0 !important;
-    }
-
-    .hamburger {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        cursor: pointer;
         outline: none !important;
-    }
-
-    .hamburger:focus {
-        outline: none !important;
-    }
-
-    .nav-item, .nav-item span {
-        outline: none !important;
-        -webkit-tap-highlight-color: red !important;
-        -webkit-focus-ring-color: red !important;
-        -webkit-focus-ring-color: rgba(255,0,0,0.5) !important;
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-focus-ring-color: transparent !important;
+        -webkit-focus-ring-color: rgba(0,0,0,0) !important;
         -webkit-user-select: none !important;
         user-select: none !important;
-        -webkit-touch-callout: none;
-        -webkit-text-size-adjust: none;
-        -webkit-tap-highlight-color: rgba(255,0,0,0.5) !important;
-        -webkit-focus-ring-color: rgba(255,0,0,0.5) !important;
+        -webkit-touch-callout: none !important;
+        -webkit-text-size-adjust: none !important;
     }
 
     .nav-item:focus, .nav-item span:focus {
         outline: none !important;
         -webkit-tap-highlight-color: transparent !important;
         -webkit-focus-ring-color: transparent !important;
-        -webkit-focus-ring-color: rgba(255,0,0,0.5) !important;
         -webkit-focus-ring-color: rgba(0,0,0,0) !important;
         -webkit-user-select: none !important;
         user-select: none !important;
-        -webkit-touch-callout: none;
-        -webkit-text-size-adjust: none;
-        -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
-        -webkit-focus-ring-color: rgba(0,0,0,0) !important;
+        -webkit-touch-callout: none !important;
+        -webkit-text-size-adjust: none !important;
     }
 
     .nav-item:active, .nav-item span:active {
@@ -501,11 +496,47 @@ body.home-page {
         -webkit-focus-ring-color: rgba(0,0,0,0) !important;
         -webkit-user-select: none !important;
         user-select: none !important;
-        -webkit-touch-callout: none;
-        -webkit-text-size-adjust: none;
-        -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
-        -webkit-focus-ring-color: rgba(0,0,0,0) !important;
+        -webkit-touch-callout: none !important;
+        -webkit-text-size-adjust: none !important;
     }
+
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+        outline: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-focus-ring-color: transparent !important;
+        -webkit-focus-ring-color: rgba(0,0,0,0) !important;
+        -webkit-user-select: none !important;
+        user-select: none !important;
+        -webkit-touch-callout: none !important;
+        -webkit-text-size-adjust: none !important;
+    }
+
+    .hamburger:focus {
+        outline: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-focus-ring-color: transparent !important;
+        -webkit-focus-ring-color: rgba(0,0,0,0) !important;
+        -webkit-user-select: none !important;
+        user-select: none !important;
+        -webkit-touch-callout: none !important;
+        -webkit-text-size-adjust: none !important;
+    }
+
+    /* Reset para todos os estados do menu mobile */
+    .nav-links.active, .nav-item, .nav-item span, .hamburger {
+        outline: none !important;
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-focus-ring-color: transparent !important;
+        -webkit-focus-ring-color: rgba(0,0,0,0) !important;
+        -webkit-user-select: none !important;
+        user-select: none !important;
+        -webkit-touch-callout: none !important;
+        -webkit-text-size-adjust: none !important;
+    }    }
 
     .nav-item, .nav-item span {
         -webkit-touch-callout: none;
