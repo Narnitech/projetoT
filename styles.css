@@ -1399,7 +1399,8 @@ body {
 }
 
 .portfolio-grid {
-    display: block;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
@@ -1414,6 +1415,7 @@ body {
     width: 100%;
     margin-bottom: 2rem;
     display: block;
+    flex: 0 0 100%;
 }
 
 .portfolio-item:hover {
