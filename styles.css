@@ -1016,6 +1016,22 @@ body {
     color: var(--text-light);
 }
 
+.portfolio-intro .content h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: var(--text-light);
+    font-weight: 700;
+}
+
+.portfolio-intro .content p {
+    font-size: 1.2rem;
+    line-height: 2;
+    color: var(--text-light);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
 /* About Section */
 .about {
     padding: 8rem 5%;
