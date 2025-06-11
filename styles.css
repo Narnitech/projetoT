@@ -3447,4 +3447,27 @@ body {
     .hero-content h1 {
         font-size: 2.5rem;
     }
+
+    /* Sobre Nós em Mobile */
+    .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 4rem 1rem;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .about-text {
+        color: var(--light-color);
+        max-width: 100%;
+        margin: 2rem auto;
+    }
+
+    .about-text p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin: 1.5rem 0;
+        color: var(--text-light);
+        opacity: 0.9;
+    }
 }
