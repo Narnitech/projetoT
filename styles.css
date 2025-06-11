@@ -529,6 +529,9 @@ body.home-page {
     /* Reset para todos os estados do menu mobile */
     .nav-links.active, .nav-item, .nav-item span, .hamburger {
         outline: none !important;
+        outline-color: transparent !important;
+        outline-style: none !important;
+        outline-width: 0 !important;
         -webkit-tap-highlight-color: transparent !important;
         -webkit-focus-ring-color: transparent !important;
         -webkit-focus-ring-color: rgba(0,0,0,0) !important;
@@ -536,6 +539,13 @@ body.home-page {
         user-select: none !important;
         -webkit-touch-callout: none !important;
         -webkit-text-size-adjust: none !important;
+        -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+        -webkit-focus-ring-color: rgba(0,0,0,0) !important;
+        -webkit-focus-ring-color: transparent !important;
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        border: none !important;
+        background: none !important;
     }    }
 
     .nav-item, .nav-item span {
@@ -569,7 +579,7 @@ body.home-page {
     .hamburger.active span:nth-child(3) {
         transform: rotate(-45deg) translate(5px, -5px);
     }
-}
+
 
 .navbar.scrolled {
     background-color: #1a1a1a;
