@@ -91,12 +91,15 @@ section {
     padding: 0;
 }
 
-body.services-page {
-    background-color: #1a1a1a;
+body.services-page,
+body.portfolio-page {
+    background-color: var(--dark-color);
+    color: var(--text-light);
 }
 
 body.home-page {
-    background-color: #1a1a1a;
+    background-color: var(--dark-color);
+    color: var(--text-light);
 }
 
 .services-page .hero {
