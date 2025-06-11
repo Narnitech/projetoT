@@ -1485,9 +1485,10 @@ body {
         gap: 1rem;
     }
 /* Featured Projects */
-.featured-portfolio-section {
+.featured-portfolio-sec.portfolio {
     padding: 5rem 0;
-    background-color: #1a1a1a;
+    background-color: var(--dark-color);
+    color: var(--text-light);
 }
 
 .portfolio-grid {
