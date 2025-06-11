@@ -595,7 +595,13 @@ body.home-page {
         display: none;
         flex-direction: column;
         gap: 1rem;
-        z-index: 1000;
+        z-index: 9999;
+        pointer-events: none;
+    }
+
+    .nav-links.active {
+        display: flex;
+        pointer-events: auto;
     }
 
     .nav-links.active {
