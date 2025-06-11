@@ -455,7 +455,19 @@ body.home-page {
         flex-direction: column;
         gap: 6px;
         cursor: pointer;
-        outline: none;
+        outline: none !important;
+    }
+
+    .hamburger:focus {
+        outline: none !important;
+    }
+
+    .nav-links a {
+        outline: none !important;
+    }
+
+    .nav-links a:focus {
+        outline: none !important;
     }
 
     .hamburger span {
