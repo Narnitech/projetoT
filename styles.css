@@ -554,6 +554,31 @@ body.home-page {
         border: none !important;
         background: none !important;
         pointer-events: auto !important;
+        box-shadow: none !important;
+        text-decoration: none !important;
+    }
+
+    /* Reset específico para os estados de foco e ativo */
+    .nav-links.active .nav-item a:focus, .nav-links.active .nav-item span:focus,
+    .nav-links.active .nav-item a:active, .nav-links.active .nav-item span:active {
+        outline: none !important;
+        outline-color: transparent !important;
+        outline-style: none !important;
+        outline-width: 0 !important;
+        -webkit-tap-highlight-color: transparent !important;
+        -webkit-focus-ring-color: transparent !important;
+        -webkit-focus-ring-color: rgba(0,0,0,0) !important;
+        -webkit-user-select: none !important;
+        user-select: none !important;
+        -webkit-touch-callout: none !important;
+        -webkit-text-size-adjust: none !important;
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        border: none !important;
+        background: none !important;
+        pointer-events: auto !important;
+        box-shadow: none !important;
+        text-decoration: none !important;
     }
 
     /* Reset específico para os estados de foco */
