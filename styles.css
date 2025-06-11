@@ -467,25 +467,31 @@ body.home-page {
         outline: none !important;
     }
 
-    .nav-links a {
+    .nav-links a, .nav-links a span {
         outline: none !important;
         -webkit-tap-highlight-color: transparent;
         -webkit-focus-ring-color: transparent;
         -webkit-focus-ring-color: rgba(0,0,0,0);
+        -webkit-user-select: none;
+        user-select: none;
     }
 
-    .nav-links a:focus {
+    .nav-links a:focus, .nav-links a span:focus {
         outline: none !important;
         -webkit-tap-highlight-color: transparent;
         -webkit-focus-ring-color: transparent;
         -webkit-focus-ring-color: rgba(0,0,0,0);
+        -webkit-user-select: none;
+        user-select: none;
     }
 
-    .nav-links a:active {
+    .nav-links a:active, .nav-links a span:active {
         outline: none !important;
         -webkit-tap-highlight-color: transparent;
         -webkit-focus-ring-color: transparent;
         -webkit-focus-ring-color: rgba(0,0,0,0);
+        -webkit-user-select: none;
+        user-select: none;
     }
 
     .hamburger span {
