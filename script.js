@@ -19,12 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile menu toggle
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    console.log('Hamburger encontrado:', !!hamburger);
-    console.log('NavLinks encontrado:', !!navLinks);
-
+    
     if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            console.log('Hamburger clicado');
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
@@ -32,14 +30,29 @@ document.addEventListener('DOMContentLoaded', () => {
         // Close mobile menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-                console.log('Clicou fora do menu');
                 hamburger.classList.remove('active');
                 navLinks.classList.remove('active');
             }
         });
-    } else {
-        console.log('Elementos do menu não encontrados');
     }
+
+    // Add event listener for touch devices
+    hamburger.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    // Prevent scrolling when menu is open
+    navLinks.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // Close menu when clicking on links
+    navLinks.addEventListener('click', (e) => {
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+    });
 
     // Navegação para links
     const navItems = document.querySelectorAll('.nav-item');
