@@ -40,7 +40,7 @@ body.portfolio-page {
     background-color: #1a1a1a;
 }
 
-.services-page .hero {
+.hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -51,7 +51,7 @@ body.portfolio-page {
     overflow: hidden;
 }
 
-.services-page .hero::before {
+.hero::before {
     content: '';
     position: absolute;
     top: 0;
@@ -62,7 +62,7 @@ body.portfolio-page {
     z-index: 3;
 }
 
-.services-page .hero .video-container {
+.hero .video-container {
     position: absolute;
     top: 0;
     left: 0;
@@ -72,86 +72,32 @@ body.portfolio-page {
     overflow: hidden;
 }
 
-.services-page .hero .video-container video {
+.hero .video-container video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     z-index: 2;
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
+}
+
+.hero .video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero .hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 .home-page .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0 2rem;
-    position: relative;
-    overflow: hidden;
     z-index: 1;
-}
-
-.home-page .hero .video-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-}
-
-.home-page .hero .video-container video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-}
-
-.home-page .hero .video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1;
-}
-
-.home-page .hero .hero-content {
-    position: relative;
-    z-index: 2;
-}
-
-.home-page .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 3;
-}
-
-.home-page .hero .video-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    overflow: hidden;
-}
-
-.home-page .hero .video-container video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 2;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
 }
 
 /* Estilos específicos para mobile */
@@ -611,7 +557,6 @@ body.portfolio-page {
         pointer-events: auto;
     }
 }
-}
 
 .nav-item::after {
     content: '';
@@ -626,6 +571,28 @@ body.portfolio-page {
 
 .nav-item:hover::after {
     width: 100%;
+}
+
+/* Corrigindo estrutura do footer */
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 0.05rem;
+    margin: 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    border-top: 1px solid #333;
+    width: 100%;
+}
+
+.footer-bottom p {
+    font-size: 0.8rem;
+    margin: 0.5rem 0;
 }
 
 .nav-item::before {
@@ -1912,14 +1879,20 @@ body {
     margin-bottom: 1rem;
 }
 
+.tech-item {
+    margin-bottom: 1.5rem;
+}
+
 .tech-item h4 {
     color: var(--light-color);
     margin-bottom: 0.5rem;
+    font-size: 1.2rem;
 }
 
 .tech-item p {
     margin-bottom: 1rem;
     color: var(--text-light);
+    font-size: 0.9rem;
 }
 
 /* Services Section */
