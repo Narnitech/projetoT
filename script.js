@@ -1,3 +1,4 @@
+console.log('Script de JavaScript carregado');
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Script carregado');
     
@@ -19,44 +20,96 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile menu toggle
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
+    console.log('Hamburger encontrado:', !!hamburger);
+    console.log('NavLinks encontrado:', !!navLinks);
     
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
+    if (!hamburger || !navLinks) {
+        console.error('Elementos do menu não encontrados');
+        return;
+    }
+    
+    // Verificar se os elementos estão no DOM
+    console.log('Hamburger no DOM:', hamburger);
+    console.log('NavLinks no DOM:', navLinks);
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-            }
-        });
+    if (!hamburger || !navLinks) {
+        console.error('Elementos do menu não encontrados');
+        return;
     }
 
-    // Add event listener for touch devices
-    hamburger.addEventListener('touchstart', (e) => {
-        e.stopPropagation();
+    // Adicionar evento de click no hamburger
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation(); // Impedir propagação do evento
+        e.preventDefault(); // Prevenir comportamento padrão
+        console.log('Hamburger clicado');
+        
+        // Remover active de todos os outros menus
+        document.querySelectorAll('.hamburger').forEach(h => {
+            if (h !== hamburger) {
+                h.classList.remove('active');
+            }
+        });
+        document.querySelectorAll('.nav-links').forEach(n => {
+            if (n !== navLinks) {
+                n.classList.remove('active');
+            }
+        });
+        
+        // Alternar classes do menu atual
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
     });
 
-    // Prevent scrolling when menu is open
-    navLinks.addEventListener('click', (e) => {
-        e.stopPropagation();
+    // Fechar menu quando clicar em links
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevenir comportamento padrão
+            const href = link.getAttribute('href');
+            
+            // Se for link externo, permitir redirecionamento
+            if (href && href.includes('.html')) {
+                window.location.href = href;
+            } else {
+                // Se for link interno, fazer scroll
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+            
+            // Fechar menu
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
     });
 
-    // Close menu when clicking on links
-    navLinks.addEventListener('click', (e) => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
+    // Fechar menu quando clicar fora
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+            console.log('Clicou fora do menu');
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
     });
 
-    // Navegação para links
-    const navItems = document.querySelectorAll('.nav-item');
-    console.log('Número de links encontrados:', navItems.length);
+    // Fechar menu quando redimensionar a tela
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+    });
+
+    // Adicionar listener para tecla ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+    });
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
             const href = item.getAttribute('href');
